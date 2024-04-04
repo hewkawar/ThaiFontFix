@@ -1,0 +1,18 @@
+name: Build and Release
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    name: Build Resource Pack
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Building Resource Pack
+        uses: actions/upload-artifact@v3
+        with:
+          name: ThaiFontFix-${GITHUB_REF#refs/heads/}
+          path: ./resourcepack  
