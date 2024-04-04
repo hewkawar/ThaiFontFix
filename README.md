@@ -1,5 +1,6 @@
 ThaiFontFix
 ===========
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/997925)](https://www.curseforge.com/minecraft/texture-packs/thaifontfix)
 
 Introduction
 ------------
