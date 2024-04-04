@@ -28,8 +28,8 @@ jobs:
         with:
           name: ThaiFontFix
 
-      - name: Display structure of downloaded files
-        run: ls -R
+      - name: Zip artifact for deployment
+        run: zip ThaiFontFix.zip ./* -r
 
       - name: Create GitHub Release
         id: create_release
