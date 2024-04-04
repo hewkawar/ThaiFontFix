@@ -1,0 +1,14 @@
+{
+    "providers": [
+        {
+            "type": "ttf",
+            "file": "font.ttf",
+            "size": 16,
+            "shift": [
+                0.0,
+                -1.0
+            ],
+            "oversample": 16.0
+        }
+    ]
+}
