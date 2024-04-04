@@ -14,5 +14,5 @@ jobs:
       - name: Building Resource Pack
         uses: actions/upload-artifact@v3
         with:
-          name: ThaiFontFix-${GITHUB_REF#refs/heads/}
+          name: ThaiFontFix
           path: ./resourcepack  
