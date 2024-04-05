@@ -76,7 +76,6 @@ jobs:
           game_endpoint: minecraft
           file_path: ThaiFontFix-${{ github.ref_name }}.zip
           release_type: beta
-          game_versions: "Minecraft 1.20.3:1.20.4"
 
   publish-modrinth:
     name: Publish Resource Pack (Modrinth)
@@ -92,7 +91,7 @@ jobs:
       - name: Zip artifact for deployment
         run: zip ThaiFontFix-${{ github.ref_name }}.zip ./* -r
 
-      - name: Publish to CurseForge
+      - name: Publish to Modrinth
         uses: RubixDev/modrinth-upload@v1
         with:
           token: ${{ secrets.PUBLISH_MODRINTH_TOKEN }}
@@ -103,5 +102,5 @@ jobs:
           release_type: beta
           featured: true
           project_id: nAi1yORJ
-          loaders: fabric,forge
+          loaders: resourcepack
 
