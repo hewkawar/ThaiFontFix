@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - "1.*"
-      - "Action-test-*"
+      - "Action-Test-*"
 
 jobs:
   build:
