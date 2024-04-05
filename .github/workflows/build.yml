@@ -74,4 +74,3 @@ jobs:
           project_id: 997925
           game_endpoint: minecraft
           file_path: ThaiFontFix-${{ github.ref_name }}.zip
-          game_versions: "Minecraft 1.20.4"
