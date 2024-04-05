@@ -54,8 +54,9 @@ jobs:
           asset_name: ThaiFontFix-${{ github.ref_name }}.zip
           asset_content_type: application/zip
 
-  publish:
-    name: Publish Resource Pack (CurseForge/Modrinth)
+  publish-curseforge:
+    name: Publish Resource Pack (CurseForge)
+    if: startsWith(github.ref, 'refs/heads/1.')
     runs-on: ubuntu-latest
     needs: [build]
     steps:
@@ -75,3 +76,5 @@ jobs:
           project_id: 997925
           game_endpoint: minecraft
           file_path: ThaiFontFix-${{ github.ref_name }}.zip
+          release_type: beta
+          game_versions: "Minecraft 1.20.3:1.20.4"
