@@ -67,17 +67,11 @@ jobs:
       - name: Zip artifact for deployment
         run: zip ThaiFontFix-${{ github.ref_name }}.zip ./* -r
 
-      - name: Publish (CurseForge/Modrinth/GitHub)
-        uses: Kir-Antipov/mc-publish@v3.3
+      - name: Publish to CurseForge
+        uses: itsmeow/curseforge-upload@3.1.1
         with:
-          curseforge-id: 997925
-          curseforge-token: "${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}"
-
-          files: |
-            ThaiFontFix-${{ github.ref_name }}.zip
-          
-          name: ThaiFontFix-${{ github.ref_name }}
-          version: thaifontfix-${{ github.ref_name }}
-          version-type: release
-          game-versions: |
-            [1.20.3,1.20.4)
+          token: ${{ secrets.PUBLISH_CURSEFORGE_TOKEN }}
+          project_id: 997925
+          game_endpoint: minecraft
+          file_path: ThaiFontFix-${{ github.ref_name }}.zip
+          game_versions: "Minecraft 1.20.4"
