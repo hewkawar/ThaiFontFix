@@ -1,7 +1,7 @@
 ThaiFontFix
 ===========
 [![CurseForge Downloads](https://img.shields.io/curseforge/dt/997925)](https://www.curseforge.com/minecraft/texture-packs/thaifontfix)
-![Modrinth Downloads](https://img.shields.io/modrinth/dt/nAi1yORJ)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/nAi1yORJ)](https://modrinth.com/resourcepack/thaifontfix)
 
 Introduction
 ------------
