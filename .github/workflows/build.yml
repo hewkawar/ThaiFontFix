@@ -52,3 +52,19 @@ jobs:
           asset_path: ThaiFontFix.zip
           asset_name: ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
           asset_content_type: application/zip
+
+      - name: Modrinth Release
+        uses: dsx137/modrinth-release-action@main
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        with:
+          name: ThaiFontFix-v${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}
+          project_id: nAi1yORJ
+          loaders: minecraft
+          game_versions: 
+          version_number: ${{ needs.build.outputs.version }}
+          files: |
+              ./ThaiFontFix.zip
+          version_type: ${{ github.event.release.prerelease == true && 'alpha' || 'release' }}
+          featured: true
+          status: 'listed'
