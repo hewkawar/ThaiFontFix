@@ -89,7 +89,7 @@ jobs:
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         with:
-          name: ThaiFontFix-v${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}
+          name: ThaiFontFix-v${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}${{ github.event.release.prerelease == true && github.sha || '' }}
           project_id: nAi1yORJ
           loaders: minecraft
           game_versions: ${{ needs.config.outputs.pack_game_version }}
@@ -140,7 +140,7 @@ jobs:
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         with:
-          name: ThaiFontFix-v${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}
+          name: ThaiFontFix-v${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}${{ github.event.release.prerelease == true && github.sha || '' }}
           project_id: hXpFKA81
           loaders: minecraft
           game_versions: ${{ needs.config.outputs.pack_game_version }}
