@@ -70,4 +70,14 @@ jobs:
             ./ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
           version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
           featured: true
-          status: 'listed'
+          status: "listed"
+
+      - name: "Upload to CurseForge"
+        uses: itsmeow/curseforge-upload@v3
+        with:
+          file_path: "ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip"
+          game_endpoint: "minecraft"
+          game_versions: "Minecraft ${{ needs.build.outputs.pack_game_version }}"
+          project_id: "997925"
+          release_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
+          token: "${{ secrets.CURSEFORGE_TOKEN }}"
