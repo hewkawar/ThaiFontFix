@@ -1,6 +1,6 @@
 {   
     "version": "1.0.0",
-    "pack_format": 42,
-    "pack_version": "1.21.2-1.21.3",
-    "pack_game_version": "1.21.2:1.21.3"
+    "pack_format": 46,
+    "pack_version": "1.21.4",
+    "pack_game_version": "1.21.4"
 }
