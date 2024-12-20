@@ -43,7 +43,7 @@ jobs:
           name: ThaiFontFix
 
       - name: Zip artifact for deployment
-        run: zip ThaiFontFix.zip ./ -r
+        run: zip ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip ./ -r
 
       - name: Upload Assets
         id: upload_assets
@@ -52,7 +52,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ThaiFontFix.zip
+          asset_path: ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
           asset_name: ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
           asset_content_type: application/zip
 
@@ -67,7 +67,7 @@ jobs:
           game_versions: ${{ needs.build.outputs.pack_game_version }}
           version_number: thaifontfix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.version }}
           files: |
-              ./ThaiFontFix.zip
+              ./ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
           version_type: ${{ github.event.release.prerelease == true && 'alpha' || 'release' }}
           featured: true
           status: 'listed'
