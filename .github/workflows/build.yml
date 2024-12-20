@@ -4,8 +4,8 @@ on:
     types: [created]
 
 jobs:
-  build:
-    name: Build Resource Pack
+  config:
+    name: Config Resource Pack
     runs-on: ubuntu-latest
     outputs:
       pack_version: ${{ steps.read_config.outputs.pack_version }}
@@ -25,25 +25,53 @@ jobs:
           echo "pack_game_version=$pack_game_version" >> $GITHUB_OUTPUT
           echo "version=$version" >> $GITHUB_OUTPUT
 
+  build_iannnnnAMD:
+    name: Build Resource Pack (iannnnnAMD)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use iannnnnAMD Font
+        run: |
+          cp -u ./fonts/iannnnnAMD.json ./resourcepack/assets/minecraft/font/default.json
+
       - name: Building Resource Pack
         uses: actions/upload-artifact@v4
         with:
-          name: ThaiFontFix
+          name: ThaiFontFix-iannnnnAMD
           path: ./resourcepack
 
-  release-content:
-    name: Release Resource Pack
+  build_Kanit:
+    name: Build Resource Pack (Kanit)
     runs-on: ubuntu-latest
-    needs: [build]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Kanit Font
+        run: |
+          cp -u ./fonts/Kanit.json ./resourcepack/assets/minecraft/font/default.json
+
+      - name: Building Resource Pack
+        uses: actions/upload-artifact@v4
+        with:
+          name: ThaiFontFix-Kanit
+          path: ./resourcepack
+
+  release-iannnnnAMD:
+    name: Release Resource Pack (iannnnnAMD)
+    runs-on: ubuntu-latest
+    needs: [config, build_iannnnnAMD]
     steps:
       - name: Download Artifacts
         id: download_artifacts
         uses: actions/download-artifact@v4
         with:
-          name: ThaiFontFix
+          name: ThaiFontFix-iannnnnAMD
 
       - name: Zip artifact for deployment
-        run: zip ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip ./ -r
+        run: zip ThaiFontFix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip ./ -r
 
       - name: Upload Assets
         id: upload_assets
@@ -52,8 +80,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
-          asset_name: ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
+          asset_path: ThaiFontFix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip
+          asset_name: ThaiFontFix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip
           asset_content_type: application/zip
 
       - name: Modrinth Release
@@ -61,13 +89,13 @@ jobs:
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         with:
-          name: ThaiFontFix-v${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}
+          name: ThaiFontFix-v${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}
           project_id: nAi1yORJ
           loaders: minecraft
-          game_versions: ${{ needs.build.outputs.pack_game_version }}
-          version_number: thaifontfix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.version }}
+          game_versions: ${{ needs.config.outputs.pack_game_version }}
+          version_number: thaifontfix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.version }}
           files: |
-            ./ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
+            ./ThaiFontFix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip
           version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
           featured: true
           status: "listed"
@@ -75,9 +103,60 @@ jobs:
       - name: "Upload to CurseForge"
         uses: itsmeow/curseforge-upload@v3
         with:
-          file_path: "ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip"
+          file_path: "ThaiFontFix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip"
           game_endpoint: "minecraft"
-          game_versions: "Minecraft ${{ needs.build.outputs.pack_game_version }}"
+          game_versions: "Minecraft ${{ needs.config.outputs.pack_game_version }}"
           project_id: "997925"
           release_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
           token: "${{ secrets.CURSEFORGE_TOKEN }}"
+
+  release-Kanit:
+    name: Release Resource Pack (Kanit)
+    runs-on: ubuntu-latest
+    needs: [config, build_Kanit]
+    steps:
+      - name: Download Artifacts
+        id: download_artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ThaiFontFix-Kanit
+
+      - name: Zip artifact for deployment
+        run: zip ThaiFontFix-Kanit-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip ./ -r
+
+      - name: Upload Assets
+        id: upload_assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ThaiFontFix-Kanit-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip
+          asset_name: ThaiFontFix-Kanit-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip
+          asset_content_type: application/zip
+
+      - name: Modrinth Release
+        uses: dsx137/modrinth-release-action@main
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        with:
+          name: ThaiFontFix-v${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}
+          project_id: hXpFKA81
+          loaders: minecraft
+          game_versions: ${{ needs.config.outputs.pack_game_version }}
+          version_number: thaifontfix-kanit-${{ needs.config.outputs.version }}-${{ needs.config.outputs.version }}
+          files: |
+            ./ThaiFontFix-Kanit-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip
+          version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
+          featured: true
+          status: "listed"
+
+      # - name: "Upload to CurseForge"
+      #   uses: itsmeow/curseforge-upload@v3
+      #   with:
+      #     file_path: "ThaiFontFix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip"
+      #     game_endpoint: "minecraft"
+      #     game_versions: "Minecraft ${{ needs.config.outputs.pack_game_version }}"
+      #     project_id: "997925"
+      #     release_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
+      #     token: "${{ secrets.CURSEFORGE_TOKEN }}"
