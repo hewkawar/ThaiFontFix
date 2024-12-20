@@ -93,7 +93,7 @@ jobs:
           project_id: nAi1yORJ
           loaders: minecraft
           game_versions: ${{ needs.config.outputs.pack_game_version }}
-          version_number: thaifontfix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.version }}
+          version_number: thaifontfix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}
           files: |
             ./ThaiFontFix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip
           version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
@@ -144,7 +144,7 @@ jobs:
           project_id: hXpFKA81
           loaders: minecraft
           game_versions: ${{ needs.config.outputs.pack_game_version }}
-          version_number: thaifontfix-kanit-${{ needs.config.outputs.version }}-${{ needs.config.outputs.version }}
+          version_number: thaifontfix-kanit-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}
           files: |
             ./ThaiFontFix-Kanit-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}.zip
           version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
