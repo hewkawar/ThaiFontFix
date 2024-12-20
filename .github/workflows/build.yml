@@ -34,7 +34,7 @@ jobs:
 
       - name: Use iannnnnAMD Font
         run: |
-          cp -u ./fonts/iannnnnAMD.json ./resourcepack/assets/minecraft/font/default.json
+          cp -f ./fonts/iannnnnAMD.json ./resourcepack/assets/minecraft/font/default.json
 
       - name: Building Resource Pack
         uses: actions/upload-artifact@v4
@@ -51,7 +51,7 @@ jobs:
 
       - name: Use Kanit Font
         run: |
-          cp -u ./fonts/Kanit.json ./resourcepack/assets/minecraft/font/default.json
+          cp -f ./fonts/Kanit.json ./resourcepack/assets/minecraft/font/default.json
 
       - name: Building Resource Pack
         uses: actions/upload-artifact@v4
