@@ -10,6 +10,7 @@ jobs:
     outputs:
       pack_version: ${{ steps.read_config.outputs.pack_version }}
       version: ${{ steps.read_config.outputs.version }}
+      pack_game_version: ${{ steps.read_config.outputs.pack_game_version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,8 +19,10 @@ jobs:
         id: read_config
         run: |
           pack_version=$(jq -r '.pack_version' ./configs/version.json)
+          pack_game_version=$(jq -r '.pack_game_version' ./configs/version.json)
           version=$(jq -r '.version' ./configs/version.json)
           echo "pack_version=$pack_version" >> $GITHUB_OUTPUT
+          echo "pack_game_version=$pack_game_version" >> $GITHUB_OUTPUT
           echo "version=$version" >> $GITHUB_OUTPUT
 
       - name: Building Resource Pack
@@ -61,7 +64,7 @@ jobs:
           name: ThaiFontFix-v${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}
           project_id: nAi1yORJ
           loaders: minecraft
-          game_versions: 
+          game_versions: ${{ needs.build.outputs.pack_game_version }}
           version_number: ${{ needs.build.outputs.version }}
           files: |
               ./ThaiFontFix.zip
