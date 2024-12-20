@@ -2,7 +2,7 @@
     "providers": [
         {
             "type": "ttf",
-            "file": "thaifontfix:Kanit.ttf",
+            "file": "font.ttf",
 			"size": 8,
             "shift": [0, -1],
 			"oversample": 16

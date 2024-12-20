@@ -2,7 +2,7 @@
     "providers": [
         {
             "type": "ttf",
-            "file": "thaifontfix:iannnnnAMD.ttf",
+            "file": "font.ttf",
             "size": 16,
             "shift": [0, -1],
             "oversample": 16
