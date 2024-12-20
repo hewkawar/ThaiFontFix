@@ -13,7 +13,7 @@ jobs:
 
       - name: Read config
         id: read_config
-        run: echo ::set-output name=version::$(cat ./configs/version.json | jq -r '.version')
+        run: echo "version=$(cat ./configs/version.json | jq -r '.version')" >> $GITHUB_OUTPUT
 
       - name: Zip artifact for deployment
         run: zip ThaiFontFix.zip ./resourcepack -r
