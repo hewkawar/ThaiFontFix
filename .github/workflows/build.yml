@@ -4,31 +4,19 @@ on:
     types: [created]
 
 jobs:
-  build:
-    name: Build Resource Pack
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Building Resource Pack
-        uses: actions/upload-artifact@v4
-        with:
-          name: ThaiFontFix
-          path: ./resourcepack
   release-content:
     name: Release Resource Pack
     runs-on: ubuntu-latest
-    needs: [build]
     steps:
-      - name: Download Artifacts
-        id: download_artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: ThaiFontFix
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read config
+        id: read_config
+        run: echo ::set-output name=version::$(cat ./configs/version.json | jq -r '.version')
 
       - name: Zip artifact for deployment
-        run: zip ThaiFontFix.zip ./* -r
+        run: zip ThaiFontFix.zip ./resourcepack -r
 
       - name: Upload Assets
         id: upload_assets
@@ -38,5 +26,5 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ThaiFontFix.zip
-          asset_name: ThaiFontFix-${{ github.ref_name }}.zip
+          asset_name: ThaiFontFix-${{ fromJson(steps.read_config.outputs.version).pack_version }}.zip
           asset_content_type: application/zip
