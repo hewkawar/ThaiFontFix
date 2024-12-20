@@ -95,7 +95,7 @@ jobs:
           project_id: nAi1yORJ
           loaders: minecraft
           game_versions: ${{ needs.config.outputs.pack_game_version }}
-          version_number: thaifontfix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}
+          version_number: ${{ github.event.release.name }}
           files: |
             ./ThaiFontFix-${{ github.event.release.name }}.zip
           version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
@@ -137,21 +137,21 @@ jobs:
           asset_name: ThaiFontFix-Kanit-${{ github.event.release.name }}.zip
           asset_content_type: application/zip
 
-      - name: Modrinth Release
-        uses: dsx137/modrinth-release-action@main
-        env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-        with:
-          name: ThaiFontFix-v${{ github.event.release.name }}
-          project_id: hXpFKA81
-          loaders: minecraft
-          game_versions: ${{ needs.config.outputs.pack_game_version }}
-          version_number: thaifontfix-kanit-${{ github.event.release.name }}
-          files: |
-            ./ThaiFontFix-Kanit-${{ github.event.release.name }}.zip
-          version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
-          featured: true
-          status: "listed"
+      # - name: Modrinth Release
+      #   uses: dsx137/modrinth-release-action@main
+      #   env:
+      #     MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+      #   with:
+      #     name: ThaiFontFix-v${{ github.event.release.name }}
+      #     project_id: hXpFKA81
+      #     loaders: minecraft
+      #     game_versions: ${{ needs.config.outputs.pack_game_version }}
+      #     version_number: ${{ github.event.release.name }}
+      #     files: |
+      #       ./ThaiFontFix-Kanit-${{ github.event.release.name }}.zip
+      #     version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
+      #     featured: true
+      #     status: "listed"
 
       # - name: "Upload to CurseForge"
       #   uses: itsmeow/curseforge-upload@v3
