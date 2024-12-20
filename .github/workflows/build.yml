@@ -67,7 +67,7 @@ jobs:
           game_versions: ${{ needs.build.outputs.pack_game_version }}
           version_number: thaifontfix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.version }}
           files: |
-              ./ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
-          version_type: ${{ github.event.release.prerelease == true && 'alpha' || 'release' }}
+            ./ThaiFontFix-${{ needs.build.outputs.version }}-${{ needs.build.outputs.pack_version }}.zip
+          version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
           featured: true
           status: 'listed'
