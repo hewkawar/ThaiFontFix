@@ -53,6 +53,7 @@ jobs:
       - name: Use Kanit Font
         run: |
           cp -f ./configs/fonts/Kanit.json ./resourcepack/assets/minecraft/font/default.json
+          cp -f ./font/Kanit.ttf ./resourcepack/assets/minecraft/font/font.ttf
 
       - name: Building Resource Pack
         uses: actions/upload-artifact@v4
