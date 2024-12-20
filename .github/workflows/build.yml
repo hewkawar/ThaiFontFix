@@ -19,8 +19,11 @@ jobs:
           echo "pack_version=$pack_version" >> $GITHUB_OUTPUT
           echo "version=$version" >> $GITHUB_OUTPUT
 
+      - name: Go to resource pack directory
+        run: cd resourcepack
+
       - name: Zip artifact for deployment
-        run: zip ThaiFontFix.zip ./resourcepack -r
+        run: zip ThaiFontFix.zip ./ -r
 
       - name: Upload Assets
         id: upload_assets
