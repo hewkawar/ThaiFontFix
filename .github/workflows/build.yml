@@ -93,7 +93,7 @@ jobs:
           project_id: nAi1yORJ
           loaders: minecraft
           game_versions: ${{ needs.config.outputs.pack_game_version }}
-          version_number: thaifontfix-${{ github.event.release.name }}
+          version_number: thaifontfix-${{ needs.config.outputs.version }}-${{ needs.config.outputs.pack_version }}
           files: |
             ./ThaiFontFix-${{ github.event.release.name }}.zip
           version_type: ${{ github.event.release.prerelease == true && 'beta' || 'release' }}
