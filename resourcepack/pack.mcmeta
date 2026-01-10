@@ -1,12 +1,12 @@
 {
 	"pack": {
-		"pack_format": 4,
-		"min_format": 4,
+		"pack_format": 34,
+		"min_format": 34,
 		"max_format": 75,
 		"supported_formats": {
-			"min_inclusive": 4,
+			"min_inclusive": 34,
 			"max_inclusive": 75
 		},
-		"description": "§fHewkawAr/ThaiFontFix\n§7Version : §a1.0.3"
+		"description": "§fHewkawAr/ThaiFontFix\n§7Version : §a1.0.4"
 	}
 }
